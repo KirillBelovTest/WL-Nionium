@@ -15,6 +15,3 @@ listener = SocketListen[server, (func[#]; tcp@#)&];
 tcp = TCPServer[]; 
 http = HTTPHandler[]; 
 tcp += http; 
-
-
-While[True, Pause[0.1]]; 
