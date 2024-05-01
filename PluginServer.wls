@@ -10,7 +10,7 @@
 
 func[packet_] := (Print[packet["Data"]]; Print["\n"]); 
 
-server = CSocketOpen["0.0.0.0", 8080]; 
+server = CSocketOpen["localhost", 8080]; 
 listener = SocketListen[server, (func[#]; tcp@#)&]; 
 tcp = TCPServer[]; 
 http = HTTPHandler[]; 
