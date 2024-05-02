@@ -134,6 +134,10 @@ UsingFrontEnd @ Module[{pods},
 ]; 
 
 
+wolframAlphaMarkdown[query_String] := 
+"hello"; 
+
+
 podToMD[___] := ""; 
 
 
