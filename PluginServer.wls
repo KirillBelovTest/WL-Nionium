@@ -16,14 +16,25 @@ PacletInstall["KirillBelov/HTTPHandler"];
 <<KirillBelov`HTTPHandler`
 
 
-server = CSocketOpen["0.0.0.0", 8080]; 
+server = CSocketOpen["localhost", 8080]; 
 tcp = TCPServer[]; 
 http = HTTPHandler[]; 
 tcp += http; 
-listener = SocketListen[server, tcp@Echo@#&]; 
+listener = SocketListen[server, tcp@#&]; 
 
 
-http["MessageHandler", "Echo"] = Function[Echo[#, "REQUEST"]; False] -> Function[Null]; 
+printRequest[request_Association?AssociationQ] := (
+	Print["= = = REQUEST = = ="]; 
+	Print[request["Body"]]; 
+	Print["= = = = = = = = = ="]; 
+	Print[""]; 
+); 
+
+
+http["MessageHandler", "PrintRequest"] = Function[printRequest[#]; False] -> Function[Null]; 
+
+
+http["MessageHandler", "Health"] = AssocMatchQ[<|"Path" -> "/health"|>] -> Function[<|"Body" -> "health"|>]; 
 
 
 http["MessageHandler", "OPTIONS"] = 
@@ -34,8 +45,9 @@ Function[
 Function[
 	<|
 		"Headers" -> <|
-			"Allow" -> "OPTONS, GET, HEAD, POST", 
+			"Allow" -> "OPTONS, GET, POST", 
 			"Server" -> "WWS", 
+			"Connection" -> "keep-alive", 
 			"Accept" -> "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", 
 			"Access-Control-Allow-Origin" -> #Headers["Origin"], 
 			"Access-Control-Allow-Methods" -> "POST, GET, OPTIONS", 
@@ -55,8 +67,7 @@ Function[
 	StringMatchQ[#Path, "/images/" ~~ __, IgnoreCase -> True]
 ] -> 
 Function[
-	Echo[#];
-	UsingFrontEnd[Echo[<|
+	UsingFrontEnd[<|
 		"Headers" -> <|
 			"Connection" -> "keep-alive", 
             "Authorization" -> "Bearer N/A", 
@@ -66,7 +77,7 @@ Function[
 		"Body" -> getImage[StringSplit[StringTrim[#Path, "/"], "/"][[-1]]], 
 		"StatusCode" -> 200, 
 		"ContentType" -> "image/png"
-	|>]]
+	|>]
 ]; 
 
 
@@ -92,8 +103,7 @@ Function[
 	StringMatchQ[#Path, "/v1/chat/completions", IgnoreCase -> True]
 ] -> 
 Function[
-	Echo[#, "REQUEST"]; 
-	Echo[<|
+	<|
 		"Headers" -> <|
 			"Connection" -> "keep-alive", 
             "Authorization" -> "Bearer N/A", 
@@ -109,7 +119,7 @@ Function[
 				"index" -> 0, 
 				"message" -> <|
 					"role" -> "assistant", 
-					"content" -> Echo[wolframAlphaMarkdown[#Body[["messages", -1, "content"]]]]
+					"content" -> wolframAlphaMarkdown[#Body[["messages", -1, "content"]]]
 				|>, 
 				"logprobs" -> Null
 			|>}, 
@@ -121,7 +131,7 @@ Function[
 		|>, "RawJSON"], 
 		"StatusCode" -> 200, 
 		"ContentType" -> "application/json"
-	|>, "RESPONSE"]
+	|>
 ]; 
 
 
@@ -166,7 +176,7 @@ UsingFrontEnd @ Module[{result = "", img, content},
 		]; 
 		If[KeyExistsQ[pod, "DataFormats"] && pod["DataFormats"] === {"ComputableData", "FormattedData"}, 
 			img = ToString[Hash[pod["Content"]]]; 
-			$images[img] = Echo[pod["Content"]];
+			$images[img] = pod["Content"];
 			result = result <> "![](http://localhost:8080/images/" <> img <> ")\n\n"
 		]; 
 		If[KeyExistsQ[pod, "DataFormats"] && MemberQ[pod["DataFormats"], "TimeSeriesData"], 
