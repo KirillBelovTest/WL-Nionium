@@ -20,11 +20,14 @@ server = CSocketOpen["localhost", 8080];
 tcp = TCPServer[]; 
 http = HTTPHandler[]; 
 tcp += http; 
-listener = SocketListen[server, tcp@#&]; 
+listener = SocketListen[server, Echo@tcp@#&]; 
 
 
 printRequest[request_Association?AssociationQ] := (
 	Print["= = = REQUEST = = ="]; 
+	Print[request["Method"], " ", request["Path"]]; 
+	KeyValueMap[Print[#1, ": ", #2]&] @ request["Headers"]; 
+	Print[]; 
 	Print[request["Body"]]; 
 	Print["= = = = = = = = = ="]; 
 	Print[""]; 
@@ -34,7 +37,20 @@ printRequest[request_Association?AssociationQ] := (
 http["MessageHandler", "PrintRequest"] = Function[printRequest[#]; False] -> Function[Null]; 
 
 
-http["MessageHandler", "Health"] = AssocMatchQ[<|"Path" -> "/health"|>] -> Function[<|"Body" -> "health"|>]; 
+$icon = ExportString[
+	Graphics[{Blue, EdgeForm[Thick, Blue], Circle[]}, ImageSize -> 100], 
+	"SVG"
+]; 
+
+
+http["MessageHandler", "Icon"] = 
+AssocMatchQ[<|"Path" -> "/favicon.ico"|>] -> 
+Function[<|"Body" -> $icon, "ContentType" -> "image/svg+xml"|>]; 
+
+
+http["MessageHandler", "Health"] = 
+AssocMatchQ[<|"Path" -> "/health"|>] -> 
+Function[<|"Body" -> DateString[]|>]; 
 
 
 http["MessageHandler", "OPTIONS"] = 
