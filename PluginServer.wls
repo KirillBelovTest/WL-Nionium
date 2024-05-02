@@ -92,7 +92,7 @@ Function[
             "Allow" -> "Origin", 
             "Access-Control-Allow-Origin" -> "*"
 		|>, 
-		"Body" -> ExportString[<|
+		"Body" -> ExportByteArray[<|
 			"id" -> CreateUUID["chatcmpl-"], 
 			"created" -> UnixTime[], 
 			"model" -> #Body["model"], 
