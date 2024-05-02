@@ -17,7 +17,8 @@ func[packet_] := (
 	If[packet["Event"] === "Received", 
 		WriteString[packet["SourceSocket"], 
 			"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 4\r\nConnection: keep-alive\r\n\r\ntest"
-		]
+		]; 
+		Close[packet["SourceSocket"]]
 	]
 ); 
 
