@@ -230,13 +230,13 @@ UsingFrontEnd @ Module[{result = "", img, content},
 		If[KeyExistsQ[pod, "DataFormats"] && pod["DataFormats"] === {"ComputableData", "FormattedData"}, 
 			img = ToString[Hash[pod["Content"]]]; 
 			$images[img] = pod["Content"];
-			result = result <> "![](http://localhost:8080/images/" <> img <> ")\n\n"
+			result = result <> "![](https://51.250.77.217:4443/images/" <> img <> ")\n\n"
 		]; 
 		If[KeyExistsQ[pod, "DataFormats"] && MemberQ[pod["DataFormats"], "TimeSeriesData"], 
 			content = contentToTimeSeries[pod["Content"]]; 
 			img = ToString[Hash[content]]; 
 			$images[img] = content;
-			result = result <> "![](http://localhost:8080/images/" <> img <> ")\n\n"
+			result = result <> "![](https://51.250.77.217:4443/images/" <> img <> ")\n\n"
 		]; 
 	]; 
 	result
