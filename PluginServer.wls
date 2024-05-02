@@ -92,7 +92,7 @@ Function[
 		|>, 
 		"Body" -> getImage[StringSplit[StringTrim[#Path, "/"], "/"][[-1]]], 
 		"StatusCode" -> 200, 
-		"ContentType" -> "image/png"
+		"ContentType" -> "image/svg+xml"
 	|>]
 ]; 
 
@@ -106,7 +106,7 @@ $images = <||>;
 getImage[key_String] := 
 If[KeyExistsQ[$images, key], 
 	If[Head[$images[key]] =!= ByteArray, 
-		$images[key] = ExportString[Rasterize[$images[key], Background->None], "PNG", Background -> None, CharacterEncoding -> "ASCII"], 
+		$images[key] = ExportByteArray[$images[key], "SVG"], 
 		$images[key]
 	], 
 	img404
