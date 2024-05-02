@@ -153,7 +153,7 @@ Function[
 
 tcp["DefaultMessageHandler"] = Function[If[#Event === "Received", 
 	Module[{json = ImportString[#Data, "RawJSON"], metadata, body}, 
-		body = ExportString[ExportString[<|
+		body = ExportByteArray[<|
 				"id" -> CreateUUID["chatcmpl-"], 
 				"created" -> UnixTime[], 
 				"model" -> json["model"], 
@@ -173,7 +173,7 @@ tcp["DefaultMessageHandler"] = Function[If[#Event === "Received",
 				|>
 			|>, 
 			"RawJSON"
-		], "String"]; 
+		]; 
 
 		metadata = <|
 			"StatusCode" -> 200, 
@@ -183,11 +183,11 @@ tcp["DefaultMessageHandler"] = Function[If[#Event === "Received",
 				"Authorization" -> "Bearer N/A", 
 				"Allow" -> "Origin", 
 				"Access-Control-Allow-Origin" -> "*", 
-				"Content-Length" -> ToString[StringLength[body]]
+				"Content-Length" -> ToString[Length[body]]
 			|>
 		|>; 
 
-		ExportString[HTTPResponse[body, metadata], "HTTPResponse"]
+		ExportByteArray[HTTPResponse[body, metadata], "HTTPResponse"]
 	]
 ]]; 
 
