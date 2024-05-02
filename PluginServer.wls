@@ -15,7 +15,7 @@ tcp += http;
 listener = SocketListen[server, tcp@Echo@#&]; 
 
 
-http["MessageHandler", "Echo"] = Function[Echo[#Data, "REQUEST"]; False] -> Function[Null]; 
+http["MessageHandler", "Echo"] = Function[Echo[#, "REQUEST"]; False] -> Function[Null]; 
 
 
 http["MessageHandler", "OPTIONS"] = 
