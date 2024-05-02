@@ -209,10 +209,6 @@ UsingFrontEnd @ Module[{pods},
 ]; 
 
 
-wolframAlphaMarkdown[query_String] := 
-WolframAlpha[Check[TextTranslation[query, "English"], query], "ShortAnswer"]; 
-
-
 podToMD[___] := ""; 
 
 
@@ -251,4 +247,4 @@ contentToTimeSeries[content_RawBoxes] :=
 FirstCase[ToExpression[FrontEndExecute[FrontEnd`ExportPacket[Cell[content], "InputText"]][[1]]], _Graphics, "", Infinity]
 
 
-(*While[True, Pause[0.1]]; *)
+While[True, Pause[0.1]]; 
