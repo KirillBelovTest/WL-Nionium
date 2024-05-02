@@ -153,7 +153,7 @@ Function[
 
 tcp["DefaultMessageHandler"] = Function[If[#Event === "Received", 
 	Module[{json = ImportString[#Data, "RawJSON"]}, 
-		<|
+		ExportString[HTTPResponse[ExportString[<|
 			"Headers" -> <|
 				"Connection" -> "keep-alive", 
 				"Authorization" -> "Bearer N/A", 
@@ -181,7 +181,7 @@ tcp["DefaultMessageHandler"] = Function[If[#Event === "Received",
 			|>, "RawJSON"], 
 			"StatusCode" -> 200, 
 			"ContentType" -> "application/json"
-		|>
+		|>, "RawJSON"], <|"ContentType" -> "appliaction/json"|>], "HTTPResponse"]
 	]
 ]]; 
 
