@@ -20,7 +20,7 @@ server = CSocketOpen["localhost", 8080];
 tcp = TCPServer[]; 
 http = HTTPHandler[]; 
 tcp += http; 
-listener = SocketListen[server, Echo@tcp@#&]; 
+listener = SocketListen[server, tcp@#&]; 
 
 
 printRequest[request_Association?AssociationQ] := (
@@ -38,7 +38,7 @@ http["MessageHandler", "PrintRequest"] = Function[printRequest[#]; False] -> Fun
 
 
 $icon = ExportString[
-	Graphics[{Blue, EdgeForm[Thick, Blue], Circle[]}, ImageSize -> 100], 
+	Graphics[{Blue, Circle[]}, ImageSize -> 100], 
 	"SVG"
 ]; 
 
@@ -166,10 +166,6 @@ UsingFrontEnd @ Module[{pods},
 	
 	StringTrim[StringRiffle[Values @ Map[podToMD] @ pods, "\n\n"]]
 ]; 
-
-
-wolframAlphaMarkdown[query_String] := 
-"hello"; 
 
 
 podToMD[___] := ""; 
