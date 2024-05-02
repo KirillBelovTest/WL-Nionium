@@ -61,7 +61,7 @@ Function[
 Function[
 	<|
 		"Headers" -> <|
-			"Allow" -> "OPTONS, GET, POST", 
+			"Allow" -> "OPTIONS, GET, POST", 
 			"Server" -> "WWS", 
 			"Connection" -> "keep-alive", 
 			"Accept" -> "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", 
