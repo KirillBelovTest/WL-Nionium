@@ -173,7 +173,7 @@ tcp["DefaultMessageHandler"] = Function[If[#Event === "Received",
 				|>
 			|>, 
 			"RawJSON"
-		], "Text"]; 
+		], "String"]; 
 
 		metadata = <|
 			"StatusCode" -> 200, 
