@@ -193,7 +193,7 @@ tcp["DefaultMessageHandler"] = Function[If[#Event === "Received",
 
 
 wolframAlphaMarkdown[query_String] := 
-UsingFrontEnd @ Module[{pods}, 
+ImportString[ExportString[UsingFrontEnd @ Module[{pods}, 
 	pods = Association @ 
 		KeyValueMap[#1 -> 
 			Prepend[Association @ KeyValueMap[Function[{k, v}, k[[2]] -> v], #2], "Key" -> #1]&
@@ -206,7 +206,7 @@ UsingFrontEnd @ Module[{pods},
 		]; 
 	
 	StringTrim[StringRiffle[Values @ Map[podToMD] @ pods, "\n\n"]]
-]; 
+], "Text", CharacterEncoding -> "ASCII"], "String"]; 
 
 
 podToMD[___] := ""; 
