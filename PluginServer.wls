@@ -1,6 +1,14 @@
 #!/usr/bin/env wolframscript
 (* ::Package:: *)
 
+Map[PacletSiteUpdate, PacletSites[]]; 
+
+PacletInstall["KirillBelov/Internal"]; 
+PacletInstall["KirillBelov/Objects"]; 
+PacletInstall["KirillBelov/CSockets"]; 
+PacletInstall["KirillBelov/TCPServer"]; 
+PacletInstall["KirillBelov/HTTPHandler"]; 
+
 <<KirillBelov`Internal`
 <<KirillBelov`Objects`
 <<KirillBelov`CSockets`
