@@ -106,7 +106,7 @@ $images = <||>;
 getImage[key_String] := 
 If[KeyExistsQ[$images, key], 
 	If[Head[$images[key]] =!= ByteArray, 
-		$images[key] = ExportByteArray[Rasterize[$images[key], Background->None], "PNG", Background -> None], 
+		$images[key] = ExportString[Rasterize[$images[key], Background->None], "PNG", Background -> None, CharacterEncoding -> "ASCII"], 
 		$images[key]
 	], 
 	img404
