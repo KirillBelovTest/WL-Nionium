@@ -152,15 +152,8 @@ Function[
 
 
 tcp["DefaultMessageHandler"] = Function[If[#Event === "Received", 
-	Module[{json = ImportString[#Data, "RawJSON"]}, 
-		ExportString[HTTPResponse[ExportString[<|
-			"Headers" -> <|
-				"Connection" -> "keep-alive", 
-				"Authorization" -> "Bearer N/A", 
-				"Allow" -> "Origin", 
-				"Access-Control-Allow-Origin" -> "*"
-			|>, 
-			"Body" -> ExportByteArray[<|
+	Module[{json = ImportString[#Data, "RawJSON"], metadata, body}, 
+		body = ExportString[<|
 				"id" -> CreateUUID["chatcmpl-"], 
 				"created" -> UnixTime[], 
 				"model" -> json["model"], 
@@ -178,10 +171,23 @@ tcp["DefaultMessageHandler"] = Function[If[#Event === "Received",
 					"compltion_tokens" -> 1, 
 					"total_tokens" -> 2
 				|>
-			|>, "RawJSON"], 
+			|>, 
+			"RawJSON"
+		]; 
+
+		metadata = <|
 			"StatusCode" -> 200, 
-			"ContentType" -> "application/json"
-		|>, "RawJSON"], <|"ContentType" -> "appliaction/json"|>], "HTTPResponse"]
+			"ContentType" -> "application/json", 
+			"Headers" -> <|
+				"Connection" -> "keep-alive", 
+				"Authorization" -> "Bearer N/A", 
+				"Allow" -> "Origin", 
+				"Access-Control-Allow-Origin" -> "*", 
+				"Content-Length" -> ToString[StringLength[body]]
+			|>
+		|>; 
+
+		ExportString[HTTPResponse[body, metadata], "HTTPResponse"]
 	]
 ]]; 
 
