@@ -209,6 +209,10 @@ UsingFrontEnd @ Module[{pods},
 ]; 
 
 
+wolframAlphaMarkdown[query_String] := 
+WolframAlpha[Check[TextTranslation[query, "English"], query], "ShortAnswer"]; 
+
+
 podToMD[___] := ""; 
 
 
