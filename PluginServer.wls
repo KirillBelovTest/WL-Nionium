@@ -151,6 +151,41 @@ Function[
 ]; 
 
 
+tcp["DefaultMessageHandler"] = Function[If[#Event === "Received", 
+	Module[{json = ImportString[#Data, "RawJSON"]}, 
+		<|
+			"Headers" -> <|
+				"Connection" -> "keep-alive", 
+				"Authorization" -> "Bearer N/A", 
+				"Allow" -> "Origin", 
+				"Access-Control-Allow-Origin" -> "*"
+			|>, 
+			"Body" -> ExportByteArray[<|
+				"id" -> CreateUUID["chatcmpl-"], 
+				"created" -> UnixTime[], 
+				"model" -> json["model"], 
+				"object" -> "chat.completion", 
+				"choices" -> {<|
+					"index" -> 0, 
+					"message" -> <|
+						"role" -> "assistant", 
+						"content" -> wolframAlphaMarkdown[json[["messages", -1, "content"]]]
+					|>, 
+					"logprobs" -> Null
+				|>}, 
+				"usage" -> <|
+					"prompt_tokens" -> 1, 
+					"compltion_tokens" -> 1, 
+					"total_tokens" -> 2
+				|>
+			|>, "RawJSON"], 
+			"StatusCode" -> 200, 
+			"ContentType" -> "application/json"
+		|>
+	]
+]]; 
+
+
 wolframAlphaMarkdown[query_String] := 
 UsingFrontEnd @ Module[{pods}, 
 	pods = Association @ 
