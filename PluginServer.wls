@@ -105,8 +105,8 @@ $images = <||>;
 
 getImage[key_String] := 
 If[KeyExistsQ[$images, key], 
-	If[Head[$images[key]] =!= ByteArray, 
-		$images[key] = ExportByteArray[$images[key], "SVG"], 
+	If[Head[$images[key]] =!= String, 
+		$images[key] = ExportString[$images[key], "SVG"], 
 		$images[key]
 	], 
 	img404
