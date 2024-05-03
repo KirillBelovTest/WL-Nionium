@@ -209,6 +209,10 @@ ImportString[ExportString[UsingFrontEnd @ Module[{pods},
 ], "Text", CharacterEncoding -> "ASCII"], "String"]; 
 
 
+wolframAlphaMarkdown[query_String] := 
+ImportString[ExportString[WolframAlpha[query, "ShortAnswer"], "Text", CharacterEncoding -> "ASCII"], "String"]; 
+
+
 podToMD[___] := ""; 
 
 

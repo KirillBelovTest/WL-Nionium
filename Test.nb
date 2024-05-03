@@ -20,7 +20,7 @@ WindowFrame->Normal*)
 Notebook[{
 },
 WindowSize->{958.5, 483},
-WindowMargins->{{Automatic, -5.25}, {-5.25, Automatic}},
+WindowMargins->{{-5.25, Automatic}, {-5.25, Automatic}},
 TaggingRules-><|"TryRealOnly" -> False|>,
 FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (December 12, 2023)",
 StyleDefinitions->"Default.nb",
