@@ -6,21 +6,21 @@ Map[PacletSiteUpdate, PacletSites[]];
 PacletInstall["KirillBelov/Internal"]; 
 PacletInstall["KirillBelov/Objects"]; 
 PacletInstall["KirillBelov/CSockets"]; 
-PacletInstall["KirillBelov/TCPServer"]; 
 PacletInstall["KirillBelov/HTTPHandler"]; 
 
 <<KirillBelov`Internal`
 <<KirillBelov`Objects`
 <<KirillBelov`CSockets`
-<<KirillBelov`TCPServer`
 <<KirillBelov`HTTPHandler`
 
 
 server = CSocketOpen["localhost", 8080]; 
-tcp = TCPServer[]; 
 http = HTTPHandler[]; 
-tcp += http; 
-listener = SocketListen[server, tcp@#&]; 
+handler = CSocketHandler[
+	"Handler" -> <|"HTTP" -> HTTPPacketQ -> http|>, 
+	"Accumulator" -> <|"HTTP" -> HTTPPacketQ -> HTTPPacketLength|>
+]; 
+listener = SocketListen[server, handler]; 
 
 
 printRequest[request_Association?AssociationQ] := (
@@ -151,6 +151,28 @@ Function[
 ]; 
 
 
+http["MessageHandler", "GETAlphaJSON"] = 
+Function[
+	#Method === "GET" && 
+	StringMatchQ[#Path, "/api/v1/wolframAlphaJSON", IgnoreCase -> True]
+] -> 
+Function[
+	<|
+		"Headers" -> <|
+			"Connection" -> "keep-alive", 
+            "Authorization" -> "Bearer N/A", 
+            "Allow" -> "Origin", 
+            "Access-Control-Allow-Origin" -> "*"
+		|>, 
+		"Body" -> ExportByteArray[<|
+			"result" -> wolframAlphaMarkdown[Echo[#Query["query"]]]
+		|>, "RawJSON"], 
+		"StatusCode" -> 200, 
+		"ContentType" -> "application/json"
+	|>
+]; 
+
+
 tcp["DefaultMessageHandler"] = Function[If[#Event === "Received", 
 	Module[{json = ImportString[#Data, "RawJSON"], metadata, body}, 
 		body = ExportByteArray[<|
@@ -211,6 +233,17 @@ ImportString[ExportString[UsingFrontEnd @ Module[{pods},
 
 wolframAlphaMarkdown[query_String] := 
 ImportString[ExportString[WolframAlpha[query, "ShortAnswer"], "Text", CharacterEncoding -> "ASCII"], "String"]; 
+
+
+wolframAlphaMarkdown[query_String] := 
+ImportString[ExportString[
+	URLExecute[StringReplace[WolframAlpha[query, "URL"], 
+		"/v1/query.jsp" -> "/v1/llm-api"]], 
+		"Table", 
+		CharacterEncoding -> "ASCII"
+	], 
+	"String"
+]; 
 
 
 podToMD[___] := ""; 

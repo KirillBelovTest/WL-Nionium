@@ -10,16 +10,107 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[       873,         35]
-NotebookOptionsPosition[       561,         21]
-NotebookOutlinePosition[      1013,         38]
-CellTagsIndexPosition[       970,         35]
+NotebookDataLength[      5221,        146]
+NotebookOptionsPosition[      3524,        112]
+NotebookOutlinePosition[      3976,        129]
+CellTagsIndexPosition[      3933,        126]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+Cell["Test the \[OpenCurlyDoubleQuote]model\[CloseCurlyDoubleQuote] on local \
+machine", "Section",
+ CellChangeTimes->{{3.9237043404023075`*^9, 
+  3.9237043560016327`*^9}},ExpressionUUID->"da6c3698-bce1-1e4c-b86e-\
+6213fe62ffbe"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Now let\[CloseCurlyQuote]s check how it works on remote machine with CHAT \
+private plugin\
+\>", "Section",
+ CellChangeTimes->{{3.92370440762525*^9, 
+  3.923704441841921*^9}},ExpressionUUID->"69c8fcb6-a419-d845-baa9-\
+5d113556539c"],
+
+Cell["this is remote machine with public IP", "Text",
+ CellChangeTimes->{{3.923704451416731*^9, 
+  3.923704459832796*^9}},ExpressionUUID->"045a2a42-610a-3545-87c6-\
+855409139a42"],
+
+Cell["the answer is too long ", "Text",
+ CellChangeTimes->{{3.923704504257292*^9, 
+  3.9237045122567616`*^9}},ExpressionUUID->"55e58278-fa01-6543-b172-\
+29895ef0672d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["What is settins?", "Section",
+ CellChangeTimes->{{3.9237045167128067`*^9, 
+  3.923704520736412*^9}},ExpressionUUID->"78b3dd6a-5937-c046-8581-\
+67e948007fd4"],
+
+Cell["https://51.250.77.217:4443/v1/chat/completions", "Text",
+ CellChangeTimes->{
+  3.9237045371557293`*^9},ExpressionUUID->"39f5de9a-0170-004b-81e1-\
+b33eacc15104"],
+
+Cell["https://51.250.77.217:4443/v1/chat/completions", "Text",
+ CellChangeTimes->{
+  3.923704608247999*^9},ExpressionUUID->"36918ab3-0dfb-754c-865c-\
+7938950e3f81"],
+
+Cell["the same addresses", "Text",
+ CellChangeTimes->{{3.9237046145921497`*^9, 
+  3.9237046185524254`*^9}},ExpressionUUID->"1a3d059c-a4ee-fb48-8661-\
+2821a01da12f"],
+
+Cell["test passed", "Text",
+ CellChangeTimes->{{3.9237046272969475`*^9, 
+  3.9237046291290016`*^9}},ExpressionUUID->"13f83598-0fdf-9f42-9a7f-\
+008c8acecb53"],
+
+Cell["select Wolfram Alpha model", "Text",
+ CellChangeTimes->{{3.9237046420237865`*^9, 
+  3.9237046565921383`*^9}},ExpressionUUID->"2c74342e-4318-ba4a-b34a-\
+abe3d7331bc8"],
+
+Cell[TextData[StyleBox["log in the console does not appeare thearefore \
+TypingMind server did not make request to the server",
+ FontWeight->"Bold",
+ FontVariations->{"Underline"->True}]], "Text",
+ CellChangeTimes->{{3.9237046955751286`*^9, 
+  3.923704740656435*^9}},ExpressionUUID->"aa48c58f-6b64-2049-a845-\
+268b047b27d3"]
+}, Open  ]],
+
+Cell["\<\
+And now I try to do the same thing with the public plugin that is available \
+for all users\
+\>", "Section",
+ CellChangeTimes->{{3.923704562264841*^9, 
+  3.9237045899204826`*^9}},ExpressionUUID->"63091043-600a-f848-9a54-\
+5be338fb7868"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["No request",
+ FontWeight->"Bold",
+ FontVariations->{"Underline"->True}]], "Title",
+ CellChangeTimes->{{3.9237048119600887`*^9, 
+  3.923704815911991*^9}},ExpressionUUID->"7ec09fd7-15e2-dd4c-82be-\
+9457a2cc7da3"],
+
+Cell[BoxData["WolframAlpha"], "Input",
+ CellChangeTimes->{{3.9237146610578747`*^9, 3.923714661378887*^9}, {
+  3.92371653057563*^9, 
+  3.923716533310423*^9}},ExpressionUUID->"3e4e3e5e-52d6-f54a-a905-\
+b288cd9d9603"]
+}, Open  ]]
 },
-WindowSize->{958.5, 483},
+WindowSize->{849, 424.5},
 WindowMargins->{{-5.25, Automatic}, {-5.25, Automatic}},
 TaggingRules-><|"TryRealOnly" -> False|>,
 FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (December 12, 2023)",
@@ -37,6 +128,26 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
+Cell[558, 20, 229, 4, 59, "Section",ExpressionUUID->"da6c3698-bce1-1e4c-b86e-6213fe62ffbe"],
+Cell[CellGroupData[{
+Cell[812, 28, 242, 6, 47, "Section",ExpressionUUID->"69c8fcb6-a419-d845-baa9-5d113556539c"],
+Cell[1057, 36, 179, 3, 31, "Text",ExpressionUUID->"045a2a42-610a-3545-87c6-855409139a42"],
+Cell[1239, 41, 167, 3, 31, "Text",ExpressionUUID->"55e58278-fa01-6543-b172-29895ef0672d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1443, 49, 163, 3, 59, "Section",ExpressionUUID->"78b3dd6a-5937-c046-8581-67e948007fd4"],
+Cell[1609, 54, 166, 3, 31, "Text",ExpressionUUID->"39f5de9a-0170-004b-81e1-b33eacc15104"],
+Cell[1778, 59, 164, 3, 31, "Text",ExpressionUUID->"36918ab3-0dfb-754c-865c-7938950e3f81"],
+Cell[1945, 64, 164, 3, 31, "Text",ExpressionUUID->"1a3d059c-a4ee-fb48-8661-2821a01da12f"],
+Cell[2112, 69, 157, 3, 31, "Text",ExpressionUUID->"13f83598-0fdf-9f42-9a7f-008c8acecb53"],
+Cell[2272, 74, 172, 3, 31, "Text",ExpressionUUID->"2c74342e-4318-ba4a-b34a-abe3d7331bc8"],
+Cell[2447, 79, 324, 6, 31, "Text",ExpressionUUID->"aa48c58f-6b64-2049-a845-268b047b27d3"]
+}, Open  ]],
+Cell[2786, 88, 246, 6, 93, "Section",ExpressionUUID->"63091043-600a-f848-9a54-5be338fb7868"],
+Cell[CellGroupData[{
+Cell[3057, 98, 234, 5, 65, "Title",ExpressionUUID->"7ec09fd7-15e2-dd4c-82be-9457a2cc7da3"],
+Cell[3294, 105, 214, 4, 25, "Input",ExpressionUUID->"3e4e3e5e-52d6-f54a-a905-b288cd9d9603"]
+}, Open  ]]
 }
 ]
 *)

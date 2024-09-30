@@ -1,0 +1,213 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[      7634,        192]
+NotebookOptionsPosition[      7530,        184]
+NotebookOutlinePosition[      7938,        200]
+CellTagsIndexPosition[      7895,        197]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"<<", "KirillBelov`CSockets`"}], "\n", 
+ RowBox[{"<<", "KirillBelov`Objects`"}], "\n", 
+ RowBox[{"<<", "KirillBelov`Internal`"}], "\n", 
+ RowBox[{"<<", "KirillBelov`HTTPHandler`"}]}], "Code",
+ CellChangeTimes->{{3.936668652618881*^9, 3.9366686852325363`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"06b441aa-93cc-884d-8894-ad3e8b30fd70"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"server", " ", "=", " ", 
+    RowBox[{"CSocketOpen", "[", 
+     RowBox[{"\"\<localhost\>\"", ",", " ", "8080"}], "]"}]}], ";"}], 
+  " "}]], "Code",
+ CellChangeTimes->{{3.9366686948999195`*^9, 3.936668713519079*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"2de67f2c-3cdd-8a47-a186-8dc37cfec65d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"http", " ", "=", " ", 
+    RowBox[{"HTTPHandler", "[", "]"}]}], ";"}], " "}]], "Code",
+ CellChangeTimes->{{3.936668729269705*^9, 3.936668733969778*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"594a7cfa-eb27-1449-ae61-90ef1acb0d56"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"handler", " ", "=", " ", 
+    RowBox[{"CSocketHandler", "[", "\n", "\t", 
+     RowBox[{
+      RowBox[{"\"\<Accumulator\>\"", " ", "->", " ", 
+       RowBox[{"<|", 
+        RowBox[{"\"\<HTTP\>\"", " ", "->", " ", 
+         RowBox[{"HTTPPacketQ", " ", "->", " ", "HTTPPacketLength"}]}], 
+        "|>"}]}], ",", " ", "\n", "\t", 
+      RowBox[{"\"\<Handler\>\"", " ", "->", " ", 
+       RowBox[{"<|", 
+        RowBox[{"\"\<HTTP\>\"", " ", "->", " ", 
+         RowBox[{"HTTPPacketQ", " ", "->", " ", "http"}]}], "|>"}]}]}], "\n", 
+     "]"}]}], ";"}], " "}]], "Code",
+ CellChangeTimes->{{3.936668716392437*^9, 3.936668782613592*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"2f934cf2-c142-7f46-b200-82628807eb0c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"listener", " ", "=", " ", 
+    RowBox[{"SocketListen", "[", 
+     RowBox[{"server", ",", " ", "handler"}], "]"}]}], ";"}], " "}]], "Code",
+ CellChangeTimes->{{3.9366687991412125`*^9, 3.93666881457885*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"6696e613-17bc-5446-8f5c-7751473d8511"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"http", "[", "\"\<DefaultMessageHandler\>\"", "]"}], " ", "=", 
+    " ", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"Echo", "[", "#", "]"}], ";", " ", "\n", "\t", 
+      RowBox[{"<|", 
+       RowBox[{
+        RowBox[{"\"\<Body\>\"", " ", "->", " ", "\"\<404\>\""}], ",", " ", 
+        RowBox[{"\"\<Code\>\"", " ", "->", " ", "404"}]}], "|>"}]}], "\n", 
+     "]"}]}], ";"}], " "}]], "Code",
+ CellChangeTimes->{{3.9366688185969963`*^9, 3.9366688280405464`*^9}, {
+  3.9366688720511284`*^9, 3.936668889419323*^9}, {3.9366695810800457`*^9, 
+  3.9366695824187374`*^9}, {3.936669674554594*^9, 3.936669709443611*^9}, {
+  3.936669793465637*^9, 3.9366698022609577`*^9}, {3.936671656530487*^9, 
+  3.936671661712242*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"da32b3f9-3129-0645-a0ea-46ddd0c8ad71"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"http", "[", 
+    RowBox[{"\"\<MessageHandler\>\"", ",", " ", "\"\<GETAlphaJSON\>\""}], 
+    "]"}], " ", "=", " ", "\n", 
+   RowBox[{
+    RowBox[{"Function", "[", "\n", "\t", 
+     RowBox[{
+      RowBox[{"#Method", " ", "===", " ", "\"\<GET\>\""}], " ", "&&", " ", 
+      "\n", "\t", 
+      RowBox[{"StringMatchQ", "[", 
+       RowBox[{
+       "#Path", ",", " ", "\"\</api/v1/wolframAlphaJSON\>\"", ",", " ", 
+        RowBox[{"IgnoreCase", " ", "->", " ", "True"}]}], "]"}]}], "\n", 
+     "]"}], " ", "->", " ", "\n", 
+    RowBox[{"Function", "[", "\n", "\t", 
+     RowBox[{"<|", "\n", "\t\t", 
+      RowBox[{
+       RowBox[{"\"\<Headers\>\"", " ", "->", " ", 
+        RowBox[{"<|", "\n", "\t\t\t", 
+         RowBox[{
+          RowBox[{
+          "\"\<Connection\>\"", " ", "->", " ", "\"\<keep-alive\>\""}], ",", 
+          " ", "\n", "            ", 
+          RowBox[{
+          "\"\<Authorization\>\"", " ", "->", " ", "\"\<Bearer N/A\>\""}], 
+          ",", " ", "\n", "            ", 
+          RowBox[{"\"\<Allow\>\"", " ", "->", " ", "\"\<Origin\>\""}], ",", 
+          " ", "\n", "            ", 
+          RowBox[{
+          "\"\<Access-Control-Allow-Origin\>\"", " ", "->", " ", 
+           "\"\<*\>\""}]}], "\n", "\t\t", "|>"}]}], ",", " ", "\n", "\t\t", 
+       RowBox[{"\"\<Body\>\"", " ", "->", " ", 
+        RowBox[{"ExportByteArray", "[", 
+         RowBox[{
+          RowBox[{"<|", "\n", "\t\t\t", 
+           RowBox[{"\"\<result\>\"", " ", "->", " ", 
+            RowBox[{"wolframAlphaMarkdown", "[", 
+             RowBox[{"Echo", "[", 
+              RowBox[{"#Query", "[", "\"\<query\>\"", "]"}], "]"}], "]"}]}], 
+           "\n", "\t\t", "|>"}], ",", " ", "\"\<RawJSON\>\""}], "]"}]}], ",", 
+       " ", "\n", "\t\t", 
+       RowBox[{"\"\<StatusCode\>\"", " ", "->", " ", "200"}], ",", " ", "\n", 
+       "\t\t", 
+       RowBox[{
+       "\"\<ContentType\>\"", " ", "->", " ", "\"\<application/json\>\""}]}], 
+      "\n", "\t", "|>"}], "\n", "]"}]}]}], ";", " "}]], "Code",
+ CellChangeTimes->{3.9366714025114994`*^9},
+ CellLabel->"In[15]:=",ExpressionUUID->"14fc3d15-b030-5647-9e5b-90dd1e9eb0ce"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"wolframAlphaMarkdown", "[", "query_String", "]"}], " ", ":=", " ",
+    "\n", 
+   RowBox[{"ImportString", "[", 
+    RowBox[{
+     RowBox[{"ExportString", "[", "\n", "\t", 
+      RowBox[{
+       RowBox[{"URLExecute", "[", 
+        RowBox[{"StringReplace", "[", 
+         RowBox[{
+          RowBox[{"WolframAlpha", "[", 
+           RowBox[{"query", ",", " ", "\"\<URL\>\""}], "]"}], ",", " ", "\n", 
+          "\t\t", 
+          RowBox[{
+          "\"\</v1/query.jsp\>\"", " ", "->", " ", "\"\</v1/llm-api\>\""}]}], 
+         "]"}], "]"}], ",", " ", "\n", "\t\t", "\"\<Table\>\"", ",", " ", 
+       "\n", "\t\t", 
+       RowBox[{"CharacterEncoding", " ", "->", " ", "\"\<ASCII\>\""}]}], "\n",
+       "\t", "]"}], ",", " ", "\n", "\t", "\"\<String\>\""}], "\n", "]"}]}], 
+  ";", " "}]], "Code",
+ CellChangeTimes->{3.9366714430545464`*^9},
+ CellLabel->"In[16]:=",ExpressionUUID->"12147315-7ab6-5d45-974d-0fe4694f62d1"]
+},
+WindowSize->{569.25, 624.75},
+WindowMargins->{{Automatic, 120}, {63.75, Automatic}},
+FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"6ba43e1b-3099-d745-8f17-2f0716380742"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[1460, 33, 361, 6, 102, "Code",ExpressionUUID->"06b441aa-93cc-884d-8894-ad3e8b30fd70"],
+Cell[1824, 41, 339, 8, 50, "Code",ExpressionUUID->"2de67f2c-3cdd-8a47-a186-8dc37cfec65d"],
+Cell[2166, 51, 277, 6, 50, "Code",ExpressionUUID->"594a7cfa-eb27-1449-ae61-90ef1acb0d56"],
+Cell[2446, 59, 754, 17, 102, "Code",ExpressionUUID->"2f934cf2-c142-7f46-b200-82628807eb0c"],
+Cell[3203, 78, 330, 7, 50, "Code",ExpressionUUID->"6696e613-17bc-5446-8f5c-7751473d8511"],
+Cell[3536, 87, 863, 19, 85, "Code",ExpressionUUID->"da32b3f9-3129-0645-a0ea-46ddd0c8ad71"],
+Cell[4402, 108, 2161, 49, 383, "Code",ExpressionUUID->"14fc3d15-b030-5647-9e5b-90dd1e9eb0ce"],
+Cell[6566, 159, 960, 23, 190, "Code",ExpressionUUID->"12147315-7ab6-5d45-974d-0fe4694f62d1"]
+}
+]
+*)
+
