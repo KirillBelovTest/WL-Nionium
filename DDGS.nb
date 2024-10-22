@@ -1,0 +1,98 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[      2885,         77]
+NotebookOptionsPosition[      3423,         76]
+NotebookOutlinePosition[      3833,         92]
+CellTagsIndexPosition[      3790,         89]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"duckDuckGoSearch", "[", "query_String", "]"}], " ", ":=", " ", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+        "url", " ", "=", " ", "\"\<https://lite.duckduckgo.com/lite/\>\""}], 
+        ",", " ", "\[IndentingNewLine]", "request", ",", " ", 
+        "\[IndentingNewLine]", "response", ",", " ", "responseBody"}], 
+       "\[IndentingNewLine]", "}"}], ",", " ", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"request", " ", "=", " ", 
+        RowBox[{"HTTPRequest", "[", 
+         RowBox[{"url", ",", " ", "\[IndentingNewLine]", 
+          RowBox[{"<|", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Method", " ", "->", " ", "\"\<POST\>\""}], ",", " ", 
+            "\[IndentingNewLine]", 
+            RowBox[{"\"\<Body\>\"", " ", "->", " ", 
+             RowBox[{"{", "\[IndentingNewLine]", 
+              RowBox[{"\"\<q\>\"", " ", "->", " ", "query"}], 
+              "\[IndentingNewLine]", "}"}]}], ",", " ", "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<ContentType\>\"", " ", "->", " ", 
+             "\"\<application/x-www-form-urlencoded\>\""}]}], 
+           "\[IndentingNewLine]", "|>"}]}], "\[IndentingNewLine]", "]"}]}], 
+       ";", " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"response", " ", "=", " ", 
+        RowBox[{"URLRead", "[", "request", "]"}]}], ";", " ", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"responseBody", " ", "=", " ", 
+        RowBox[{"response", "[", "\"\<Body\>\"", "]"}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"ImportString", "[", 
+        RowBox[{"responseBody", ",", " ", "\"\<HTML\>\""}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], " "}]], "Input",ExpressionUUID->\
+"d579401e-2f1a-b643-892b-c895d72e5d0b"]
+},
+WindowSize->{783.75, 634.5},
+WindowMargins->{{Automatic, 488.25}, {106.5, Automatic}},
+FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"319ac8cb-a957-5443-b0b2-dd7922d414f8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[1460, 33, 1959, 41, 427, "Input",ExpressionUUID->"d579401e-2f1a-b643-892b-c895d72e5d0b"]
+}
+]
+*)
+
